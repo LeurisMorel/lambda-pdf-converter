@@ -4,6 +4,8 @@
 
 Transform PDF files into high-quality JPEG images with this AWS Lambda function. Designed for seamless integration with automation tools like n8n, this solution delivers converted images as a convenient ZIP archive at a fraction of the cost of commercial API services.
 
+The workflow file for n8n can [be found here].
+
 ## ✨ Features
 
 - Converts PDF files to JPEG images with adjustable quality
@@ -59,9 +61,9 @@ graph TD
         J -->|Save| K[ZIP File with Images]
     end
     
-    style A fill:#ff9ed8,stroke:#333,stroke-width:2px
-    style B fill:#85b4ff,stroke:#333,stroke-width:2px
-    style E fill:#90EE90,stroke:#333,stroke-width:2px
+    style A fill:#ff52b9,stroke:#333,stroke-width:2px
+    style B fill:#3985ff,stroke:#333,stroke-width:2px
+    style E fill:#137f13,stroke:#333,stroke-width:2px
     style n8n fill:#2A2A2A,stroke:#666,color:#fff
     linkStyle default stroke:#666,stroke-width:2px
 ```
