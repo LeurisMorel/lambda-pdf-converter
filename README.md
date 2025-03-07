@@ -84,6 +84,7 @@ All nodes include detailed descriptions and instructions in their configurations
 - **Scale Automatically**: Handles thousands of simultaneous conversions without configuration
 - **Privacy Focused**: Your documents never leave your AWS account
 - **Deployment Flexibility**: Choose between Docker-based approach or Lambda Layers
+- **Maximum Reusability**: Unlike embedded n8n-only solutions, this modular approach can be used with any system that can make HTTP requests
 
 ## 💰 Cost Breakdown
 
@@ -258,6 +259,8 @@ curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d
 ```
 
 ## 🔌 Integrating with n8n
+
+> **A Note on External Dependencies:** This approach does create an external dependency on AWS, which some users might prefer to avoid by handling everything within n8n for simplicity. It's entirely possible to perform PDF conversion directly in n8n by adding custom packages to JavaScript Code nodes. However, we believe the Lambda-based approach offers greater flexibility and long-term benefits. Your conversion function becomes a standalone service that can be called from n8n, other automation tools, web applications, or any system that can make HTTP requests - not just locked inside your n8n workflows. Both approaches have merit depending on your specific needs and preferences.
 
 ### Setting Up Least Privilege AWS Credentials
 
