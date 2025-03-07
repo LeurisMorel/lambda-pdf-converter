@@ -4,7 +4,54 @@
 
 Transform PDF files into high-quality JPEG images with this AWS Lambda function. Designed for seamless integration with automation tools like n8n, this solution delivers converted images as a convenient ZIP archive at a fraction of the cost of commercial API services.
 
-The workflow file for n8n can [be found here].
+## 🌟 Ready-to-Use n8n Workflow
+
+We've created a production-ready n8n workflow that demonstrates how to integrate this Lambda function with other services to create powerful automation pipelines.
+
+[Download the n8n Workflow](https://gettingautomated.com/github/lambda-pdf-converter/workflow)
+
+### What This Workflow Does
+
+This workflow shows the complete integration path from PDF source to AI image analysis:
+
+1. **Extract PDFs from Google Drive**
+2. **Convert to JPEGs using the Lambda function**
+3. **Unzip the resulting files**
+4. **Send the images to OpenAI for interpretation**
+
+Perfect for document processing, content extraction, or automated image analysis pipelines!
+
+```mermaid
+graph TD
+    A[Google Drive] -->|Download PDF| B[Extract Content]
+    B -->|PDF Binary| C[PDF to JPEG Lambda]
+    C -->|ZIP File| D[Unzip & Extract Files]
+    D -->|Multiple JPEGs| E[Base64 Encode Images]
+    E -->|Aggregated Images| F[Build OpenAI Request]
+    F -->|Multiple Images| G[OpenAI Vision API]
+    
+    style A fill:#ff52b9,stroke:#333,stroke-width:2px
+    style C fill:#3985ff,stroke:#333,stroke-width:2px
+    style G fill:#137f13,stroke:#333,stroke-width:2px
+```
+
+### Key Components
+
+- **PDF Source**: Reads PDF files directly from Google Drive
+- **Lambda Integration**: Seamlessly calls the AWS Lambda function
+- **ZIP Processing**: Extracts individual JPEGs from the ZIP archive
+- **OpenAI Integration**: Prepares and sends images to OpenAI's Vision API
+- **Multi-Image Support**: Handles multi-page PDFs automatically
+
+### Setting Up This Workflow
+
+1. Import the workflow JSON into your n8n instance
+2. Configure your Google Drive credentials
+3. Add your AWS Lambda credentials and update the function ARN
+4. Set up your OpenAI API key
+5. Adjust the prompt for image interpretation as needed
+
+This workflow serves as both a demonstration and a ready-to-use template that you can customize for your specific needs.
 
 ## ✨ Features
 
@@ -40,6 +87,27 @@ The workflow file for n8n can [be found here].
   - SaaS PDF conversion APIs: $10-100/month for similar volume
   - Pay-per-conversion APIs: $0.01-0.10 per conversion ($100-1,000 for 10,000 files)
   - Many services impose rate limits or queue processing at lower tiers
+
+### Detailed Cost Comparison
+
+It's clear that AWS Lambda stands out as the most cost-effective option for PDF-to-JPEG conversions. The table below compares our Lambda solution with popular commercial alternatives:
+
+| Service | Lowest Plan / Cost | Monthly Allotment (Approx) | Approx Cost for 1,000 Pages | Derived Cost per Page |
+|:--------|:-------------------|:----------------------------|:----------------------------|:----------------------|
+| **AWS Lambda** | Pay-per-use after free tier | N/A (pay for compute + requests) | ~$0.0213 for 1,000 pages¹ | ~$0.000021/page |
+| **Zamzar** | $9/mo (Developer) | ~3,000 conversions/month | $9 for up to 3,000 pages² | $0.003/page |
+| **CloudConvert** | $9/mo (1,000 conversion mins) | ~1,000 pages (if ~1 min per page) | $9 | $0.009/page |
+| **DocConversionAPI** | $9.99/mo (Basic) | 1,000 conversions/month | $9.99 | $0.00999/page |
+| **ConvertAPI** | $9/mo (Basic: 1,500 sec) | ~1,500 pages (if ~1 sec per page) | $9 | $0.006/page |
+| **PDF.co** | $39/mo | ~2,000 credits | $39 (covers ~1,000 pages) | ~$0.02/page |
+| **Aspose Cloud** | $29/mo (Basic) | ~3,000 API calls/month | $29 | $0.029/page |
+| **Adobe PDF Tools** | Pay-as-you-go (~$0.05/transaction) | N/A | ~$50 for 1,000 pages | $0.05/page |
+| **PDFTron** | Custom/Contact Sales | N/A | Varies, enterprise-focused | N/A |
+
+¹ Based on 1 GB memory, ~1.266 seconds billed duration per invocation. Excludes the Lambda free tier, which can significantly reduce or eliminate costs for moderate usage.  
+² 100 conversions/day = ~3,000 conversions/month.
+
+Real-world costs may vary (e.g., file sizes, concurrency, how each service measures usage). Nonetheless, **if you're willing to package PDF conversion tools (poppler, ImageMagick, etc.) into a Lambda function, AWS is strikingly affordable compared to most specialized SaaS solutions.**
 
 ## 🏗️ Architecture
 
@@ -307,6 +375,34 @@ layer.zip
 ```
 
 You can learn more about this approach in AWS documentation if needed.
+
+## 🤝 Join the Getting Automated Community
+
+Want to go deeper with automation and get direct support? Join our exclusive automation community!
+
+### What You Get from the Getting Automated Community:
+- **In-depth Automation Workflows**: Learn how to integrate AI into your automation processes
+- **Battle-Tested Templates**: Access exclusive, production-ready automation templates
+- **Expert Guidance**: Get direct support from automation professionals
+- **Early Access to Content**: Be the first to access exclusive content
+- **Private Support Channels**: Receive personalized support through direct chat and office hours
+- **Community of Serious Builders**: Connect with like-minded professionals
+
+The community is capped at 250 members to ensure quality support and interaction.
+
+[Join the Getting Automated Community](https://gettingautomated.com/community)
+
+## 🔗 Additional Resources
+
+- **Website**: [Getting Automated](https://gettingautomated.com)
+- **YouTube Channel**: [Getting Automated YouTube](https://www.youtube.com/@hunterasneed)
+- **Free Workflow Automation Tools**: [Automation Tools](https://tools.gettingautomated.com)
+
+### Need Personalized Help?
+
+If you need this solution built for you or want personalized guidance, you can schedule a consultation:
+
+[Schedule a 30-Minute Connect](https://calendly.com/workflowsy/30-minute-connect)
 
 ## 📄 License
 
