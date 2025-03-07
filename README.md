@@ -43,15 +43,28 @@ graph TD
 - **OpenAI Integration**: Prepares and sends images to OpenAI's Vision API
 - **Multi-Image Support**: Handles multi-page PDFs automatically
 
-### Setting Up This Workflow
+### Using the Ready-Made Workflow
 
-1. Import the workflow JSON into your n8n instance
-2. Configure your Google Drive credentials
-3. Add your AWS Lambda credentials and update the function ARN
-4. Set up your OpenAI API key
-5. Adjust the prompt for image interpretation as needed
+We've done the hard work for you! The provided workflow is ready to import and use immediately:
 
-This workflow serves as both a demonstration and a ready-to-use template that you can customize for your specific needs.
+1. **Download the Workflow**: Get the JSON file from the link above
+2. **Import into n8n**: 
+   - Open your n8n instance
+   - Go to "Workflows" → "Import from File" or "Import from URL"
+   - Select the downloaded JSON file or paste the URL
+   - Click "Import"
+
+That's it! The workflow is now in your n8n instance with all nodes already configured and connected.
+
+#### Customization (Optional)
+
+If you need to connect to your own services:
+
+- For Google Drive: Update the credentials in the Google Drive node
+- For AWS Lambda: Update the credentials and function ARN in the AWS Lambda node
+- For OpenAI: Add your API key to the OpenAI credentials
+
+All nodes include detailed descriptions and instructions in their configurations to help you understand and customize as needed.
 
 ## ✨ Features
 
@@ -293,53 +306,6 @@ For security best practices, create an IAM user with only the minimum permission
    - Function Name: `pdf-to-jpg-converter` (or your chosen name)
    - Invocation Type: `RequestResponse`
 
-### Converting a PDF File Using n8n
-
-#### Option 1: Using a local PDF file
-
-1. Use a **Read Binary File** node to read your PDF file
-2. Connect it to a **Function** node to encode the file to base64:
-   ```javascript
-   return {
-     json: {
-       body: $binary.data.toString('base64')
-     }
-   };
-   ```
-3. Connect to your configured **AWS Lambda** node
-
-#### Option 2: Using a PDF URL
-
-1. Use a **Function** node to specify a PDF URL:
-   ```javascript
-   return {
-     json: {
-       body: JSON.stringify({
-         pdf_url: "https://example.com/path/to/document.pdf"
-       })
-     }
-   };
-   ```
-2. Connect to your configured **AWS Lambda** node
-
-### Processing the Response in n8n
-
-1. The Lambda will return a base64-encoded ZIP file containing JPEG images
-2. Use a **Function** node to decode the response:
-   ```javascript
-   const zipContent = Buffer.from($node["AWS Lambda"].json.body, 'base64');
-   return {
-     json: { success: true },
-     binary: {
-       data: {
-         data: zipContent,
-         mimeType: 'application/zip',
-         fileName: 'pdf_images.zip'
-       }
-     }
-   };
-   ```
-3. Connect to a **Write Binary File** node to save the ZIP file
 
 ## 🧩 Alternative Approach: Lambda Layers
 
