@@ -8,7 +8,7 @@ Transform PDF files into high-quality JPEG images with this AWS Lambda function.
 
 We've created a production-ready n8n workflow that demonstrates how to integrate this Lambda function with other services to create powerful automation pipelines.
 
-[Download the n8n Workflow](https://gettingautomated.com/github/lambda-pdf-converter/workflow)
+[Download the n8n Workflow](https://gettingautomated.com/i-saved-thousands-on-apis-with-this-n8n-aws-workflow/)
 
 ### What This Workflow Does
 
